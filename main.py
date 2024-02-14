@@ -1,9 +1,43 @@
 import pandas as pd
 
 
-sheetname = "Computer Science"
-filename = "2024 Texting Tracker.xlsx"
-workbook = pd.read_excel(filename, sheet_name=sheetname)
+def spreadsheet():
+    # spreadsheet access
+    sheetname_input = int(
+        input(
+            """
+    ### Only input number
+    1. Aerospace
+    2. Biomedical
+    3. Chemical
+    4. Civil
+    5. CE
+    6. CIS
+    7. CS
+    8. Electrical
+    9. IIT
+    10. Mechanical
+    What is the sheet of major you want to access: """
+        )
+    )
+
+    student_major_list = {
+        1: "Aerospace",
+        2: "Biomedical",
+        3: "Chemical",
+        4: "Civil",
+        5: "Computer Eng.",
+        6: "Computer Information Systems",
+        7: "Computer Science",
+        8: "Electrical",
+        9: "Integrated Information Tech.",
+        10: "Mechanical",
+    }
+    sheetname = student_major_list[sheetname_input]
+
+    filename = "2024 Texting Tracker.xlsx"
+    workbook = pd.read_excel(filename, sheet_name=sheetname)
+    return workbook
 
 
 def print_text(preferred_name, user_name, major):
@@ -33,20 +67,19 @@ def ask_user_info():
     name = input("What is your name: ")
     major = int(
         input(
-            """What is your major:
-                  ### Only input number
-                  1. Aerospace
-                  2. Biomedical
-                  3. Chemical
-                  4. Civil
-                  5. CE
-                  6. CIS
-                  7. CS
-                  8. Electrical
-                  9. IIT
-                  10. Mechanical
-
-                  """
+            """
+### Only input number
+1. Aerospace
+2. Biomedical
+3. Chemical
+4. Civil
+5. CE
+6. CIS
+7. CS
+8. Electrical
+9. IIT
+10. Mechanical
+What is your major: """
         )
     )
     major = major_list[major]
@@ -76,7 +109,7 @@ def ask_num():
 
 
 def main():
-
+    workbook = spreadsheet()
     people_to_send = workbook[workbook["Text Sent"].isnull()]
     people_to_send = people_to_send.head(ask_num())
     preferred_name = people_to_send["Preferred Name"].tolist()
