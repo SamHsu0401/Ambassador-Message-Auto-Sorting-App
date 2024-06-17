@@ -1,4 +1,4 @@
-Message Auto Sorting App
+Message Automation App
 
 This is a script for Ambassador to automate the text message task. 
 
