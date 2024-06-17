@@ -1,4 +1,9 @@
+#!/Users/samhsu/Desktop/Personal\ Learning/Ambassador/env/bin/python
+
 import pandas as pd
+
+
+FILENAME = "2024 Texting Tracker.xlsx"
 
 
 def spreadsheet():
@@ -17,7 +22,7 @@ def spreadsheet():
     8. Electrical
     9. IIT
     10. Mechanical
-    What is the sheet of major you want to access: """
+    Which sheet of major you want to access: """
         )
     )
 
@@ -35,8 +40,9 @@ def spreadsheet():
     }
     sheetname = student_major_list[sheetname_input]
 
-    filename = "2024 Texting Tracker.xlsx"
-    workbook = pd.read_excel(filename, sheet_name=sheetname)
+    xls = pd.ExcelFile(FILENAME)
+    xls.sheet_names
+    workbook = pd.read_excel(FILENAME, sheet_name=sheetname)
     return workbook
 
 
