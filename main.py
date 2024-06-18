@@ -3,7 +3,8 @@
 import pandas as pd
 
 
-FILENAME = "2024 Texting Tracker.xlsx"
+FILEPATH = "data files/2024 Texting Tracker.xlsx"
+OUTPUT_PATH = "data files/Message Output.xlsx"
 
 
 def spreadsheet():
@@ -40,9 +41,9 @@ def spreadsheet():
     }
     sheetname = student_major_list[sheetname_input]
 
-    xls = pd.ExcelFile(FILENAME)
+    xls = pd.ExcelFile(FILEPATH)
     xls.sheet_names
-    workbook = pd.read_excel(FILENAME, sheet_name=sheetname)
+    workbook = pd.read_excel(FILEPATH, sheet_name=sheetname)
     return workbook
 
 
@@ -105,8 +106,10 @@ def write_to_excel(preferred_name, names_not_sent, phone_numbers):
     )
     print("***Spreadsheet Created Successfully***")
 
-    output_filename = "Message Output.xlsx"
-    messages_df.to_excel(output_filename, index=False)
+    messages_df.to_excel(OUTPUT_PATH, index=False)
+    json_messages = messages_df.to_json(orient="index", indent=4)
+    with open("data_index.json", "w") as file:
+        file.write(json_messages)
 
 
 def ask_num():
